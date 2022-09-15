@@ -2,7 +2,9 @@
 
 namespace JMS\JobQueueBundle\Twig;
 
-class JobQueueExtension extends \Twig_Extension
+use Twig\Extension\AbstractExtension;
+
+class JobQueueExtension extends AbstractExtension
 {
     private $linkGenerators = array();
 
