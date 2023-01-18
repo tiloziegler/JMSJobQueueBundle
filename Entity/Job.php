@@ -122,7 +122,7 @@ class Job
     /** @ORM\Column(type = "string") */
     private $command;
 
-    /** @ORM\Column(type = "json_array") */
+    /** @ORM\Column(type = "json") */
     private $args;
 
     /**
@@ -158,7 +158,7 @@ class Job
     /** @ORM\OneToMany(targetEntity = "Job", mappedBy = "originalJob", cascade = {"persist", "remove", "detach", "refresh"}) */
     private $retryJobs;
 
-    /** @ORM\Column(type = "jms_job_safe_object", name="stackTrace", nullable = true) */
+    /** @ORM\Column(type = "json", name="stackTrace", nullable = true) */
     private $stackTrace;
 
     /** @ORM\Column(type = "smallint", nullable = true, options = {"unsigned": true}) */
@@ -364,6 +364,9 @@ class Job
 
     public function getArgs()
     {
+        if($this->args === null){
+            $this->args = [];
+        }
         return $this->args;
     }
 

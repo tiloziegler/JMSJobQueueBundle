@@ -23,7 +23,7 @@ class RunCommandTest extends BaseTestCase
 
         $output = $this->runConsoleCommand(array('--max-runtime' => 5, '--worker-name' => 'test'));
         $expectedOutput = "Started Job(id = 1, command = \"adoigjaoisdjfijasodifjoiajsdf\").\n"
-                         ."Job(id = 1, command = \"adoigjaoisdjfijasodifjoiajsdf\") finished with exit code 1.\n";
+            ."Job(id = 1, command = \"adoigjaoisdjfijasodifjoiajsdf\") finished with exit code 1.\n";
         $this->assertEquals($expectedOutput, $output);
         $this->assertEquals('failed', $a->getState());
         $this->assertEquals('', $a->getOutput());
@@ -290,7 +290,7 @@ OUTPUT
         $this->app->setAutoExit(false);
         $this->app->setCatchExceptions(false);
 
-        $this->em = self::$kernel->getContainer()->get('doctrine')->getManagerForClass('JMSJobQueueBundle:Job');
+        $this->em = self::$kernel->getContainer()->get('doctrine')->getManagerForClass(Job::class);
     }
 
     private function runConsoleCommand(array $args = array())
