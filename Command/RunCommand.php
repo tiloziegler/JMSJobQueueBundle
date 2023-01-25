@@ -351,7 +351,7 @@ class RunCommand extends Command
                 continue;
             }
 
-            $this->output->writeln( $data['job'] . ' finished with exit code1 ' . $data['process']->getExitCode() . '.' );
+            $this->output->writeln( $data['job'] . ' finished with exit code ' . $data['process']->getExitCode() . '.' );
 
             // If the Job exited with an exception, let's reload it so that we
             // get access to the stack trace. This might be useful for listeners.

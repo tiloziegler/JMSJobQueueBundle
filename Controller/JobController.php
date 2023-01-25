@@ -71,7 +71,6 @@ class JobController extends AbstractController
      */
     public function detailsAction( Job $job )
     {
-        dump( $job->getRelatedEntities() );
         $relatedEntities = array();
         foreach( $job->getRelatedEntities() as $entity ) {
             exit;
