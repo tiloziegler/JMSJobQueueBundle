@@ -19,6 +19,7 @@
 namespace JMS\JobQueueBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\JobQueueBundle\Exception\InvalidStateTransitionException;
 use JMS\JobQueueBundle\Exception\LogicException;
@@ -141,7 +142,7 @@ class Job
         joinColumns: [new ORM\JoinColumn( name: "source_job_id", referencedColumnName: "id" )],
         inverseJoinColumns: [new ORM\JoinColumn( name: "dest_job_id", referencedColumnName: "id" )],
     )]
-    private ?ArrayCollection $dependencies = null;
+    private ?Collection $dependencies = null;
 
 
     #[ORM\Column(type: "text", nullable: true)]
@@ -170,7 +171,7 @@ class Job
 
 
     #[ORM\OneToMany(targetEntity: Job::class, mappedBy: "originalJob", cascade: ["persist", "remove", "detach", "refresh"])]
-    private ?ArrayCollection $retryJobs = null;
+    private ?Collection $retryJobs = null;
 
 
     #[ORM\Column(type: "json", name: "stackTrace", nullable: true)]
@@ -189,7 +190,7 @@ class Job
     private ?int $memoryUsageReal = null;
 
 
-    private ?array $relatedEntities = null;
+    private array|Collection|null $relatedEntities = null;
 
 
     public static function create( $command, array $args = array(), $confirmed = true, $queue = self::DEFAULT_QUEUE, $priority = self::PRIORITY_DEFAULT )
