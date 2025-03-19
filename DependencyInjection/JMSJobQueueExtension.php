@@ -24,7 +24,7 @@ use JMS\JobQueueBundle\Entity\Type\SafeObjectType;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
 /**
@@ -37,7 +37,7 @@ class JMSJobQueueExtension extends Extension implements PrependExtensionInterfac
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
@@ -60,7 +60,7 @@ class JMSJobQueueExtension extends Extension implements PrependExtensionInterfac
         $container->setParameter('jms_job_queue.queue_options', $config['queue_options']);
     }
 
-    public function prepend(ContainerBuilder $container)
+    public function prepend(ContainerBuilder $container): void
     {
         $container->prependExtensionConfig('doctrine', array(
             'dbal' => array(
