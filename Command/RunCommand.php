@@ -36,8 +36,6 @@ use Symfony\Component\Process\Process;
 class RunCommand extends Command
 {
 
-    protected static $defaultName = 'jms-job-queue:run';
-
 
     /** @var string */
     private $env;
@@ -91,9 +89,10 @@ class RunCommand extends Command
     }
 
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
+            ->setName( 'jms-job-queue:run')
             ->setDescription( 'Runs jobs from the queue.' )
             ->addOption( 'max-runtime', 'r', InputOption::VALUE_REQUIRED, 'The maximum runtime in seconds.', 900 )
             ->addOption( 'max-concurrent-jobs', 'j', InputOption::VALUE_REQUIRED, 'The maximum number of concurrent jobs.', 4 )
